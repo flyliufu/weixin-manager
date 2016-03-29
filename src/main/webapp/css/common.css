@@ -1,0 +1,22 @@
+body, html {
+	padding : 0px;
+	margin : 0px;
+	height : 100%;
+	width : 100%;
+	font-family: Merriweather,serif;
+    font-size: 15px;
+}
+
+input {
+	height: 25px;
+	vertical-align: middle;
+}
+label {
+	vertical-align: middle;
+}
+
+ul,li {
+	padding : 0px;
+	margin : 0px;
+	list-style: none;
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lefu.weixin.entity.Menu">
+
+	<resultMap type="Menu" id="menuResultMap">
+		<id property="id" column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+		<result property="parent" column="PARENT" jdbcType="INTEGER" javaType="java.lang.Integer" />
+		<result property="name" column="NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="url" column="URL" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="hasPage" column="HASPAGE" jdbcType="INTEGER" javaType="java.lang.Integer" />
+		<association property="parentMenu" select="getMenuById" column="PARENT" />
+	</resultMap>
+
+	<!-- 查询学生列表 -->
+	<select id="findMenuList" resultType="Menu" resultMap="menuResultMap">  
+        <![CDATA[ 
+            SELECT * FROM wx_menu order by id
+        ]]>
+	</select>
+
+	<insert id="addMenu" parameterType="Menu" useGeneratedKeys="true"
+		keyProperty="id">
+	    <![CDATA[
+	    	INSERT INTO wx_menu (parent,name,url,haspage) VALUES (#{parent},#{name},#{url},#{hasPage})
+	    ]]>
+	</insert>
+	<!-- 删除菜单，以及其子菜单 -->
+	<delete id="delMenu" parameterType="Menu">
+	    <![CDATA[
+	    	delete from wx_menu  where id = #{id} or parent = #{id}
+	    ]]>
+	</delete>
+
+	<select id="getMenu" parameterType="Menu" resultMap="menuResultMap" resultType="Menu">
+	    <![CDATA[
+	    	select * from wx_menu  where id = #{id}
+	    ]]>
+	</select>
+	
+	<select id="getMenuById" parameterType="string" resultMap="menuResultMap" resultType="Menu">
+	    <![CDATA[
+	    	select * from wx_menu  where id = #{parent}
+	    ]]>
+	</select>
+	
+	<update id="updateMenu" parameterType="Menu">
+	    <![CDATA[
+	    	update wx_menu m 
+	    	set m.parent = #{parent}, m.name = #{name}, m.url = #{url}, m.hasPage = #{hasPage} 
+	    	where m.id = #{id}
+	    ]]>
+	</update>
+</mapper>
