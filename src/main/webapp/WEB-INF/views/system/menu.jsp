@@ -7,7 +7,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>微信菜单</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/dojo/dojox/widget/Dialog/Dialog.css"/>
+
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/system/menu.js"></script>
 </head>
 <body>
@@ -72,6 +73,5 @@
         </div>
     </div>
 </div>
-<dir id="dialog"></dir>
 </body>
 </html>

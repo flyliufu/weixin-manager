@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="NeedsMoreDojoConfiguration">
+    <option name="amdImportNamingExceptions">
+      <map />
+    </option>
+    <option name="amdImportNamingExceptionsList">
+      <list>
+        <option value="dijit/layout/ContentPane(ContentPane" />
+        <option value="dijit/layout/AccordionContainer(AccordionContainer" />
+        <option value="cbtree/model/TreeStoreModel(TreeStoreModel" />
+      </list>
+    </option>
+    <option name="dojoSourcesDirectory" value="$PROJECT_DIR$/src/main/webapp/dojo" />
+    <option name="dojoSourcesShareProjectSourcesRoot" value="true" />
+    <option name="projectSourcesDirectory" value="$PROJECT_DIR$" />
+    <option name="version" value="0.7" />
+  </component>
+</project>
