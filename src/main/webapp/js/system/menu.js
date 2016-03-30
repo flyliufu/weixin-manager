@@ -33,17 +33,8 @@ require(["dojo/ready"], function (ready) {
                 }
             });
         })
-        require(["dijit/form/Button", "dijit/TooltipDialog", "dijit/popup"],
-            function (Button, TooltipDialog, popup) {
-                var myTooltipDialog = new TooltipDialog({
-                    id: 'myTooltipDialog',
-                    style: "width: 300px;",
-                    content: "父节点不可删除!",
-                    onMouseLeave: function () {
-                        popup.close(myTooltipDialog);
-                    }
-                });
-
+        require(["dijit/form/Button"],
+            function (Button) {
                 var save = new Button({
                     iconClass: "dijitIconSave"
                 }, "btn_menu_submit");
@@ -89,35 +80,42 @@ require(["dojo/ready"], function (ready) {
                 });
                 dojo.connect(edit, "onClick", function () {
                     var node = diId("tree_sys_menu").attr("selectedItem");
-                    if (node.id == 1) {
-                        popup.open({
-                            popup:  myTooltipDialog,
-                            around: dojo.body()
-                        });
+                    if (node && node.id) {
+                        if (node.id == 1) {
+                            alert("根节点不可修改!");
+                        } else {
+                            // 设置表单操作为修改
+                            action = "update";
+                            ajax("/system/toUpdate.do", {"id": node.id}, function (data) {
+                                if (data.status == "success" && data.obj) {
+                                    // 设置表单数据
+                                    menuForm.setValues(data.obj);
+                                    diId("menu_parent_name").setValue(data.obj.parentMenu.name);
+                                }
+                            });
+                        }
                     } else {
-                        // 设置表单操作为修改
-                        action = "update";
-                        ajax("/system/toUpdate.do", {"id": node.id}, function (data) {
-                            if (data.status == "success" && data.obj) {
-                                // 设置表单数据
-                                menuForm.setValues(data.obj);
-                                diId("menu_parent_name").setValue(data.obj.parentMenu.name);
-                            }
-                        });
+                        alert("请选择一个菜单");
                     }
                 });
                 dojo.connect(del, "onClick", function () {
                     var node = diId("tree_sys_menu").attr("selectedItem");
-                    if (node && node.id && node.id != 1) {
-                        ajax("/system/delMenu.do", {
-                            "id": node.id
-                        }, function (data) {
-                            if (data.status == "success") {
-                                loadMenuTree();
-                                // loadMainMenu();
-                                menuForm.reset();
-                            }
-                        });
+                    if (node && node.id) {
+                        if (node.id == 1) {
+                            alert("根节点不可删除!");
+                        } else {
+                            ajax("/system/delMenu.do", {
+                                "id": node.id
+                            }, function (data) {
+                                if (data.status == "success") {
+                                    loadMenuTree();
+                                    // loadMainMenu();
+                                    menuForm.reset();
+                                }
+                            });
+                        }
+                    } else {
+                        alert("请选择一个菜单");
                     }
                 });
             });
