@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
@@ -50,11 +49,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="ipt_has_page">是否有子界面：</label></td>
+                    <td><label for="sel_has_page">是否有子界面：</label></td>
                     <td>
-                        <input name="hasPage" id="ipt_has_page" style="display: none;" value="1"
-                               data-dojo-type="dijit/form/TextBox"/>
-                        <div id="sel_has_page" style="width:100%;height:25px"></div>
+                        <div name="hasPage" id="sel_has_page"/>
                     </td>
                 </tr>
                 <tr>
